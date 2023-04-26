@@ -2,23 +2,13 @@ const { expect } = require('chai');
 const { sinon } = require('sinon');
 const productsModel = require('../../../src/models/productsModel');
 const connection = require('../../../src/models/connection');
+const productsMock = require('./mocks/products.mock');
 
 describe('Model Tests', () => {
   describe('Succes', () => {
     afterEach(() => sinon.restore());
     it('findAll w/ data', async () => {
-      sinon.stub(connection, 'execute').resolves([
-        [
-          {
-            "id": 1,
-            "name": "Martelo de Thor"
-          },
-          {
-            "id": 2,
-            "name": "Traje de encolhimento"
-          },
-        ],
-      ]);
+      sinon.stub(connection, 'execute').resolves([productsMock.productsMock]);
 
       const result = await productsModel.findAll();
 
@@ -36,14 +26,7 @@ describe('Model Tests', () => {
     });
 
     it('findById w/ data', async () => {
-      sinon.stub(connection, 'execute').resolves([
-        [
-          {
-            "id": 1,
-            "name": "Martelo de Thor"
-          },
-        ],
-      ]);
+      sinon.stub(connection, 'execute').resolves([productsMock.productsMockId]);
 
       const result = await productsModel.findById(1);
 
