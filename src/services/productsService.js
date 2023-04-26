@@ -13,7 +13,7 @@ const findById = async (id) => {
 const insert = async (product) => {
   const result = await productsModel.insert(product);
   return result;
-}
+};
 
 module.exports = {
   findAll,
