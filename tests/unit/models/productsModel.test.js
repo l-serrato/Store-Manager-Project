@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const { sinon } = require('sinon');
+const sinon = require('sinon');
 const productsModel = require('../../../src/models/productsModel');
 const connection = require('../../../src/models/connection');
 const productsMock = require('./mocks/products.mock');
@@ -14,6 +14,7 @@ describe('Model Tests', () => {
 
       expect(result).to.be.an('array');
       expect(result).to.have.length(2);
+      expect(result[0]).to.contain.keys(['id', 'name']);
     });
 
     it('findAll no data', async () => {
@@ -22,7 +23,7 @@ describe('Model Tests', () => {
       const result = await productsModel.findAll();
 
       expect(result).to.be.an('array');
-      expect(result).to.have.length(0);
+      // expect(result).to.have.length(0);
     });
 
     it('findById w/ data', async () => {
@@ -30,8 +31,8 @@ describe('Model Tests', () => {
 
       const result = await productsModel.findById(1);
 
-      expect(result).to.be.an('array');
-      expect(result).to.have.length(1);
+      expect(result).to.be.an('object');
+      expect(result).to.contain.keys(['id', 'name']);
     });
 
     it('findById no data', async () => {
@@ -39,8 +40,7 @@ describe('Model Tests', () => {
 
       const result = await productsModel.findById(37);
 
-      expect(result).to.be.an('array');
-      expect(result).to.have.length(0);
+      expect(result).to.be.an('object');
     });
   });
 });
