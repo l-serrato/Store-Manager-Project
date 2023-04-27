@@ -16,7 +16,13 @@ const findById = async (req, res) => {
 
 const insert = async (req, res) => {
   const product = req.body;
-    const result = await productsService.insert(product);
+  const result = await productsService.insert(product);
+  if (!product.name) {
+    return res.status(400).json({ message: '"name" is required' });
+  }
+  if (product.name.length < 5) {
+    return res.status(422).json({ message: '"name" length must be at least 5 characters long' });
+  }
   res.status(201).json(result);
 };
 
