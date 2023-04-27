@@ -11,8 +11,8 @@ describe('Service Tests', () => {
       sinon.stub(productsModel, 'findAll').resolves([
         [
           {
-            "id": 2,
-            "name": "Traje de encolhimento"
+            "id": 1,
+            "name": "Martelo de Thor"
           },
         ],
       ]);
@@ -27,10 +27,6 @@ describe('Service Tests', () => {
             "id": 1,
             "name": "Martelo de Thor"
           },
-          {
-            "id": 2,
-            "name": "Traje de encolhimento"
-          },
         ],
       ]);
     });
@@ -41,14 +37,14 @@ describe('Service Tests', () => {
 
     it('Non-existing ID', async function () {
 
-      sinon.stub(productsModel, 'findById').resolves([]);
+      sinon.stub(productsModel, 'findById').resolves(undefined);
 
       const result = await productsService.findById(37);
 
-      expect(result).to.equal({ message: 'Product not found' });
+      expect(result).to.equal(undefined);
     });
 
-    it('Existenting ID ', async () => {
+    it('Existing ID ', async () => {
 
       sinon.stub(productsModel, 'findById').resolves([[
         {

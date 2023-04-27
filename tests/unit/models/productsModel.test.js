@@ -18,12 +18,12 @@ describe('Model Tests', () => {
     });
 
     it('findAll no data', async () => {
-      sinon.stub(connection, 'execute').resolves([]);
+      sinon.stub(connection, 'execute').resolves([[]]);
 
       const result = await productsModel.findAll();
 
       expect(result).to.be.an('array');
-      // expect(result).to.have.length(0);
+      expect(result).to.have.length(0);
     });
 
     it('findById w/ data', async () => {
@@ -36,11 +36,11 @@ describe('Model Tests', () => {
     });
 
     it('findById no data', async () => {
-      sinon.stub(connection, 'execute').resolves([]);
+      sinon.stub(connection, 'execute').resolves([[]]);
 
-      const result = await productsModel.findById(37);
+      const result = await productsModel.findById();
 
-      expect(result).to.be.an('object');
+      expect(result).to.be.equal(undefined);
     });
   });
 });
