@@ -42,5 +42,17 @@ describe('Model Tests', () => {
 
       expect(result).to.be.equal(undefined);
     });
+
+    it('Insert test', async () => {
+      const product = {
+        "name": "Excalibur"
+      };
+
+      sinon.stub(connection, 'execute').resolves([{ insertId: 42 }]);
+
+      const result = await productsModel.insert(product);
+
+      expect(result).to.deep.equal({ id: 42, name: 'Excalibur' });
+    });
   });
 });

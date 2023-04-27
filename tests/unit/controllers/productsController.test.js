@@ -107,4 +107,60 @@ describe('Teste de unidade do productsController', () => {
       expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
     });
   });
+
+  describe('Insert tests', function () {
+    afterEach(() => sinon.restore());
+    it('Insert ok', async function () {
+
+      const res = {};
+      const req = {
+        body: {
+          name: "Excalibur"
+        },
+      };
+
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+
+      sinon
+        .stub(productsService, 'insert')
+        .resolves({
+            "id": 1,
+            "name": "Excalibur"
+          });
+
+      await productsController.insert(req, res);
+
+      expect(res.status).to.have.been.calledWith(201);
+      expect(res.json).to.have.been.calledWith({
+        "id": 1,
+        "name": "Excalibur"
+      });
+    });
+
+    it('Name < 5', async () => {
+
+      const res = {};
+      const req = {
+        body: {
+          name: 'Oi',
+        },
+      };
+
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+
+      sinon
+        .stub(productsService, 'insert')
+        .resolves({
+          type: 'INVALID_VALUE', message: '"name" length must be at least 5 characters long',
+        });
+
+      await productsController.insert(req, res);
+
+      expect(res.status).to.have.been.calledWith(422);
+      expect(res.json).to.have.been.calledWith({ message: '"name" length must be at least 5 characters long' });
+    });
+
+  });
 });

@@ -64,4 +64,33 @@ describe('Service Tests', () => {
       ],]);
     });
   });
+
+  describe('Insert tests', () => {
+    const product = {
+      "id": 1,
+      "name": "Excalibur"
+    };
+    const invalidValue = {
+      name: 'Oi',
+    };
+    afterEach(() => sinon.restore());
+    it('Invalid name', async () => {
+
+      const result = await productsService.insert(invalidValue);
+
+      expect(result.type).to.equal('INVALID_VALUE');
+      expect(result.message).to.equal('"name" length must be at least 5 characters long');
+    });
+
+    it('Insert ok', async () => {
+      sinon.stub(productsModel, 'insert').resolves(1);
+      sinon.stub(productsModel, 'findById').resolves(product[0]);
+
+      const result = await productsService.insert(product);
+
+      expect(result.type).to.equal(undefined);
+      expect(result.message).to.deep.equal(product[0]);
+    });
+
+  });
 });
