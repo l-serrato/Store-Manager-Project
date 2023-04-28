@@ -14,10 +14,10 @@ const findAllSales = async () => {
 
 const findSalesById = async (id) => {
   const sale = await salesModel.findSalesById(id);
-  const saleFormat = sale.map((sale) => ({
-    date: sale.date,
-    productId: sale.product_id,
-    quantity: sale.quantity,
+  const saleFormat = sale.map((s) => ({
+    date: s.date,
+    productId: s.product_id,
+    quantity: s.quantity,
   }));
   return saleFormat;
 };
