@@ -26,8 +26,29 @@ const insert = async (req, res) => {
   res.status(201).json(result);
 };
 
+const update = async (req, res) => {
+  const { id } = req.params;
+  const product = req.body;
+  const result = await productsService.update(product, id);
+  if (product) {
+    return res.status(200).json(result);
+  }
+  return res.status(404).json({ message: 'Product not found' });
+};
+
+const remove = async (req, res) => {
+  const { id } = req.params;
+  const [product] = await productsService.remove(id);
+  if (product.affectedRows > 0) {
+    return res.status(204).json();
+  }
+  return res.status(404).json({ message: 'Product not found' });
+};
+
 module.exports = {
   findAll,
   findById,
   insert,
+  update,
+  remove,
 };

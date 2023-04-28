@@ -18,10 +18,8 @@ const findSalesById = async (id) => {
 };
 
 const insertSales = async (sale) => {
-  const date = new Date().toISOString().slice(0, 19).replace('T', ' ');
-
   const [{ insertId }] = await connection
-    .execute(`INSERT INTO sales (date) VALUE ('${date}')`);
+    .execute('INSERT INTO sales (date) VALUE (?)');
 
   sale.forEach(({ productId, quantity }) => {
     connection.execute(
