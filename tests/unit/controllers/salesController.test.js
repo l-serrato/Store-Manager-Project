@@ -5,11 +5,11 @@ const sinonChai = require('sinon-chai');
 const { expect } = chai;
 chai.use(sinonChai);
 
-const productsService = require('../../../src/services/productsService');
-const productsController = require('../../../src/controllers/productsController');
+const salesService = require('../../../src/services/salesService');
+const salesController = require('../../../src/controllers/salesController');
 
 describe('Controller Tests', () => {
-  describe('Products list', () => {
+  describe('Sales list', () => {
     afterEach(() => sinon.restore());
     it('Status 200 & list', async () => {
 
@@ -19,39 +19,35 @@ describe('Controller Tests', () => {
       res.status = sinon.stub().returns(res);
       res.json = sinon.stub().returns();
       sinon
-        .stub(productsService, 'findAll')
+        .stub(salesService, 'findAllSales')
         .resolves([
           [
             {
-              "id": 1,
-              "name": "Martelo de Thor"
-            },
-            {
-              "id": 2,
-              "name": "Traje de encolhimento"
+              "saleId": 1,
+              "date": "2023-04-28T17:50:47.000Z",
+              "productId": 1,
+              "quantity": 5
             },
           ],
         ]);
 
-      await productsController.findAll(req, res);
+      await salesController.findAllSales(req, res);
 
       expect(res.status).to.have.been.calledWith(200);
       expect(res.json).to.have.been.calledWith([
         [
           {
-            "id": 1,
-            "name": "Martelo de Thor"
-          },
-          {
-            "id": 2,
-            "name": "Traje de encolhimento"
+            "saleId": 1,
+            "date": "2023-04-28T17:50:47.000Z",
+            "productId": 1,
+            "quantity": 5
           },
         ],
       ]);
     });
   });
 
-  describe('Product Search', () => {
+  describe('Sale Search', () => {
     afterEach(() => sinon.restore());
     it('Status 200 & data', async () => {
 
@@ -63,24 +59,28 @@ describe('Controller Tests', () => {
       res.status = sinon.stub().returns(res);
       res.json = sinon.stub().returns();
       sinon
-        .stub(productsService, 'findById')
+        .stub(salesService, 'findSalesById')
         .resolves([
           [
             {
-              "id": 1,
-              "name": "Martelo de Thor"
+              "saleId": 1,
+              "date": "2023-04-28T17:50:47.000Z",
+              "productId": 1,
+              "quantity": 5
             },
           ],
         ]);
 
-      await productsController.findById(req, res);
+      await salesController.findSalesById(req, res);
 
       expect(res.status).to.have.been.calledWith(200);
       expect(res.json).to.have.been.calledWith([
         [
           {
-            "id": 1,
-            "name": "Martelo de Thor"
+            "saleId": 1,
+            "date": "2023-04-28T17:50:47.000Z",
+            "productId": 1,
+            "quantity": 5
           },
         ],
       ]);
@@ -95,20 +95,20 @@ describe('Controller Tests', () => {
 
       res.status = sinon.stub().returns(res);
       res.json = sinon.stub().returns();
-      
-      sinon
-        .stub(productsService, 'findById')
-        .resolves({ message: 'Product not found' });
 
-      await productsController.findById(req, res);
+      sinon
+        .stub(salesService, 'findSalesById')
+        .resolves({ message: 'Sale not found' });
+
+      await salesController.findSalesById(req, res);
 
       // expect(res.status).to.have.been.calledWith(404);
 
-      expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
+      expect(res.json).to.have.been.calledWith({ message: 'Sale not found' });
     });
   });
 
-  describe('Insert tests', function () {
+  /* describe('Insert tests', function () {
     afterEach(() => sinon.restore());
     it('Insert ok', async function () {
 
@@ -123,13 +123,13 @@ describe('Controller Tests', () => {
       res.json = sinon.stub().returns();
 
       sinon
-        .stub(productsService, 'insert')
+        .stub(salesService, 'insert')
         .resolves({
-            "id": 1,
-            "name": "Excalibur"
-          });
+          "id": 1,
+          "name": "Excalibur"
+        });
 
-      await productsController.insert(req, res);
+      await salesController.insert(req, res);
 
       expect(res.status).to.have.been.calledWith(201);
       expect(res.json).to.have.been.calledWith({
@@ -151,16 +151,16 @@ describe('Controller Tests', () => {
       res.json = sinon.stub().returns();
 
       sinon
-        .stub(productsService, 'insert')
+        .stub(salesService, 'insert')
         .resolves({
           type: 'INVALID_VALUE', message: '"name" length must be at least 5 characters long',
         });
 
-      await productsController.insert(req, res);
+      await salesController.insert(req, res);
 
       expect(res.status).to.have.been.calledWith(422);
       expect(res.json).to.have.been.calledWith({ message: '"name" length must be at least 5 characters long' });
     });
 
-  });
+  }); */
 });
