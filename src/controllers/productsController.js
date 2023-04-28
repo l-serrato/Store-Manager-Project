@@ -26,7 +26,7 @@ const insert = async (req, res) => {
   res.status(201).json(result);
 };
 
-const update = async (req, res) => {
+/* const update = async (req, res) => {
   const { id } = req.params;
   const product = req.body;
   const result = await productsService.update(product, id);
@@ -34,7 +34,7 @@ const update = async (req, res) => {
     return res.status(200).json(result);
   }
   return res.status(404).json({ message: 'Product not found' });
-};
+}; */
 
 const remove = async (req, res) => {
   const { id } = req.params;
@@ -49,6 +49,6 @@ module.exports = {
   findAll,
   findById,
   insert,
-  update,
+  // update,
   remove,
 };

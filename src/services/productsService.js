@@ -18,10 +18,10 @@ const insert = async (product) => {
   return result;
 };
 
-const update = async (product, id) => {
+/* const update = async (product, id) => {
   const result = await productsModel.update(product, id);
   return result;
-};
+}; */
 
 const remove = (id) => {
   const product = productsModel.remove(id);
@@ -32,6 +32,6 @@ module.exports = {
   findAll,
   findById,
   insert,
-  update,
+  // update,
   remove,
 };

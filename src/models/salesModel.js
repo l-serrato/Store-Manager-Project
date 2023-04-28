@@ -17,7 +17,7 @@ const findSalesById = async (id) => {
   return result;
 };
 
-const insertSales = async (sale) => {
+/* const insertSales = async (sale) => {
   const [{ insertId }] = await connection
     .execute('INSERT INTO sales (date) VALUE (?)');
 
@@ -28,10 +28,10 @@ const insertSales = async (sale) => {
     );
   });
   return { id: insertId, itemsSold: sale };
-};
+}; */
 
 module.exports = {
   findAllSales,
   findSalesById,
-  insertSales,
+  // insertSales,
 };

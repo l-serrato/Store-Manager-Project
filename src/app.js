@@ -16,11 +16,11 @@ app.get('/products/:id', productsController.findById);
 
 app.post('/products', productsController.insert);
 
-app.put('/products/:id', productsController.update);
+// app.put('/products/:id', productsController.update);
 
 app.delete('/products/:id', productsController.remove);
 
-app.post('/sales', salesController.insertSales);
+// app.post('/sales', salesController.insertSales);
 
 app.get('/sales', salesController.findAllSales);
 

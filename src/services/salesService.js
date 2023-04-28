@@ -1,5 +1,5 @@
 const salesModel = require('../models/salesModel');
-const schema = require('./validations/inputValues');
+// const schema = require('./validations/inputValues');
 
 const findAllSales = async () => {
   const sales = await salesModel.findAllSales();
@@ -22,15 +22,15 @@ const findSalesById = async (id) => {
   return saleFormat;
 };
 
-const insertSales = async (sale) => {
+/* const insertSales = async (sale) => {
   const error = schema.validateSales(sale.productId);
   if (error.type) return error;
   const result = await salesModel.insertSales(sale);
   return result;
-};
+}; */
 
 module.exports = {
   findAllSales,
   findSalesById,
-  insertSales,
+  // insertSales,
 };
