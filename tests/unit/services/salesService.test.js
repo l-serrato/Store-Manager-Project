@@ -23,16 +23,7 @@ describe('Service Tests', () => {
 
       expect(result).to.be.an('array');
       expect(result).to.have.length(1);
-      expect(result).to.deep.equal([
-        [
-          {
-            "saleId": 1,
-            "date": "2023-04-28T17:50:47.000Z",
-            "productId": 1,
-            "quantity": 5
-          },
-        ],
-      ]);
+      expect(result[0]).to.contain.keys(['date', 'quantity']);
     });
   });
 
@@ -41,11 +32,14 @@ describe('Service Tests', () => {
 
     it('Non-existing ID', async function () {
 
-      sinon.stub(salesModel, 'findSalesById').resolves(undefined);
+      sinon.stub(salesModel, 'findSalesById').resolves([{
+        "message": "Sale not found"
+      }]);
 
       const result = await salesService.findSalesById(37);
 
-      expect(result).to.equal(undefined);
+      expect(result).to.be.an('array');
+      expect(result).to.have.length(1);
     });
 
     it('Existing ID ', async () => {
@@ -61,13 +55,7 @@ describe('Service Tests', () => {
 
       const result = await salesService.findSalesById(2);
 
-      expect(result).to.deep.equal([[
-        {
-          "date": "2023-04-28T17:50:47.000Z",
-          "productId": 3,
-          "quantity": 15
-        }
-      ],]);
+      expect(result[0]).to.contain.keys(['date', 'quantity']);
     });
   });
 

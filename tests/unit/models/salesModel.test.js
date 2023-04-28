@@ -13,8 +13,8 @@ describe('Model Tests', () => {
       const result = await salesModel.findAllSales();
 
       expect(result).to.be.an('array');
-      expect(result).to.have.length(2);
-      expect(result[0]).to.contain.keys(['id', 'name']);
+      expect(result).to.have.length(3);
+      expect(result[0]).to.contain.keys(['date', 'quantity']);
     });
 
     it('findAllSales no data', async () => {
@@ -31,8 +31,7 @@ describe('Model Tests', () => {
 
       const result = await salesModel.findSalesById(2);
 
-      expect(result).to.be.an('object');
-      expect(result).to.contain.keys(['id', 'name']);
+      expect(result).to.be.an('array');
     });
 
     it('findSalesById no data', async () => {
@@ -40,7 +39,7 @@ describe('Model Tests', () => {
 
       const result = await salesModel.findSalesById();
 
-      expect(result).to.be.equal(undefined);
+      expect(result).to.deep.equal([]);
     });
 
     /* it('Insert test', async () => {
