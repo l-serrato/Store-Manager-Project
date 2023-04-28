@@ -54,5 +54,19 @@ describe('Model Tests', () => {
 
       expect(result).to.deep.equal({ id: 42, name: 'Excalibur' });
     });
+
+    /* it('Remove ok', async () => {
+      sinon.stub(connection, 'execute').resolves([{ affectedRows: 1 }]);
+      const response = await productsModel.remove(1);
+
+      expect(response.status).to.equal(204);
+    });
+
+    it('Remove no data', async () => {
+      sinon.stub(connection, 'execute').resolves([{ affectedRows: 0 }]);
+      const response = await productsModel.remove(9);
+
+      expect(response.status).to.equal(404);
+    }); */
   });
 });
