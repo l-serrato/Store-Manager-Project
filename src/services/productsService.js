@@ -23,8 +23,8 @@ const update = async (product, id) => {
   return result;
 };
 
-const remove = async (id) => {
-  const product = await productsModel.remove(id);
+const remove = (id) => {
+  const product = productsModel.remove(id);
   return product;
 };
 
