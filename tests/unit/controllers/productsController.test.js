@@ -200,12 +200,12 @@ describe('Controller Tests', () => {
       res.json = sinon.stub().returns();
 
       sinon
-        .stub(productsService, 'findById')
-        .resolves({ message: 'Product not found' });
+        .stub(productsService, 'remove')
+        .resolves([{ message: 'Product not found' }]);
 
-      await productsController.findById(req, res);
+      await productsController.remove(req, res);
 
-      // expect(res.status).to.have.been.calledWith(404);
+      expect(res.status).to.have.been.calledWith(404);
 
       expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
     });
