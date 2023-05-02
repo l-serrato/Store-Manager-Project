@@ -162,27 +162,55 @@ describe('Controller Tests', () => {
       expect(res.json).to.have.been.calledWith({ message: '"name" length must be at least 5 characters long' });
     });
 
+    it('No name', async () => {
+
+      const res = {};
+      const req = {
+        body: {
+          name: '',
+        },
+      };
+
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+
+      sinon
+        .stub(productsService, 'insert')
+        .resolves({
+          type: 'INVALID_VALUE', message: '"name" is required',
+        });
+
+      await productsController.insert(req, res);
+
+      expect(res.status).to.have.been.calledWith(400);
+      expect(res.json).to.have.been.calledWith({ message: '"name" is required' });
+    });
+
   });
 
   describe('Remove tests', () => {
     afterEach(() => sinon.restore());
-    it('Data', async () => {
+    it('Status 200 & data', async () => {
 
       const res = {};
       const req = {
-        params: { id: 2 },
+        params: { id: 1 },
       };
 
       res.status = sinon.stub().returns(res);
       res.json = sinon.stub().returns();
       sinon
         .stub(productsService, 'remove')
-        .resolves([[]]);
+        .resolves([
+          [],
+        ]);
 
       await productsController.remove(req, res);
 
       expect(res.status).to.have.been.calledWith(404);
-      // expect(res.json).to.have.been.calledWith();
+      /* expect(res.json).to.have.been.calledWith([
+        [],
+      ]); */
     });
 
     it('Non-existing id', async () => {
