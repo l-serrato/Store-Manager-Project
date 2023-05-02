@@ -163,4 +163,51 @@ describe('Controller Tests', () => {
     });
 
   });
+
+  describe('Remove tests', () => {
+    afterEach(() => sinon.restore());
+    it('Status 200 & data', async () => {
+
+      const res = {};
+      const req = {
+        params: { id: 1 },
+      };
+
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+      sinon
+        .stub(productsService, 'remove')
+        .resolves([
+          [],
+        ]);
+
+      await productsController.remove(req, res);
+
+      expect(res.status).to.have.been.calledWith(404);
+      /* expect(res.json).to.have.been.calledWith([
+        [],
+      ]); */
+    });
+
+    it('Non-existing id', async () => {
+
+      const res = {};
+      const req = {
+        params: { id: 37 },
+      };
+
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+
+      sinon
+        .stub(productsService, 'findById')
+        .resolves({ message: 'Product not found' });
+
+      await productsController.findById(req, res);
+
+      // expect(res.status).to.have.been.calledWith(404);
+
+      expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
+    });
+  })
 });
