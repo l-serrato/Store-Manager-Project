@@ -107,22 +107,15 @@ describe('Service Tests', () => {
 
   describe('Remove tests', () => {
     afterEach(() => sinon.restore());
-    it('Non-existing ID', async function () {
-
-      sinon.stub(productsModel, 'remove').resolves(undefined);
-
-      const result = await productsService.remove(37);
-
-      expect(result).to.equal(undefined);
-    });
-
-    it('Existing ID ', async () => {
-
-      sinon.stub(productsModel, 'remove').resolves([[],]);
-
+    it('Test with sucess', async function () {
+      sinon.stub(productsModel, 'remove').resolves(1);
       const result = await productsService.remove(1);
-
-      expect(result).to.deep.equal([[],]);
-    });
+      expect(result).to.be.deep.equal(1)
+    })
+    it('Test without sucess', async function () {
+      sinon.stub(productsModel, 'remove').resolves(0);
+      const result = await productsService.remove(1);
+      expect(result).to.equal(0)
+    })
   })
 });

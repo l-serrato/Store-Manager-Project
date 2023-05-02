@@ -191,47 +191,36 @@ describe('Controller Tests', () => {
   describe('Remove tests', () => {
     afterEach(() => sinon.restore());
     it('Status 200 & data', async () => {
-
-      const res = {};
+      sinon.stub(productsService, 'remove').resolves([1]);
       const req = {
-        params: { id: 1 },
+        params: 1,
+      };
+      const res = {
+        status: () => { },
+        json: () => { },
       };
 
-      res.status = sinon.stub().returns(res);
-      res.json = sinon.stub().returns();
-      sinon
-        .stub(productsService, 'remove')
-        .resolves([
-          [],
-        ]);
+      sinon.stub(res, 'status').returns(res);
+      sinon.stub(res, 'json').returns(null);
 
-      await productsController.remove(req, res);
-
-      expect(res.status).to.have.been.calledWith(404);
-      /* expect(res.json).to.have.been.calledWith([
-        [],
-      ]); */
-    });
-
-    it('Non-existing id', async () => {
-
-      const res = {};
+      const result = await productsController.remove(req, res);
+      expect(result).to.be.deep.equal(null)
+    })
+    it('Test without sucess', async function () {
+      sinon.stub(productsService, 'remove').resolves([37]);
       const req = {
-        params: { id: 37 },
+        params: 1,
+      };
+      const res = {
+        status: () => { },
+        json: () => { },
       };
 
-      res.status = sinon.stub().returns(res);
-      res.json = sinon.stub().returns();
+      sinon.stub(res, 'status').returns(res);
+      sinon.stub(res, 'json').returns({ "message": "Product not found" });
 
-      sinon
-        .stub(productsService, 'remove')
-        .resolves([{ message: 'Product not found' }]);
-
-      await productsController.remove(req, res);
-
-      expect(res.status).to.have.been.calledWith(404);
-
-      expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
-    });
+      const result = await productsController.remove(req, res);
+      expect(result).to.be.deep.equal({ "message": "Product not found" })
+    })
   })
-});
+  });
