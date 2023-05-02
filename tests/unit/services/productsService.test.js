@@ -73,6 +73,9 @@ describe('Service Tests', () => {
     const invalidValue = {
       name: 'Oi',
     };
+    const noValue = {
+      name: '',
+    };
     afterEach(() => sinon.restore());
     it('Invalid name', async () => {
 
@@ -80,6 +83,14 @@ describe('Service Tests', () => {
 
       expect(result.type).to.equal('INVALID_VALUE');
       expect(result.message).to.equal('"name" length must be at least 5 characters long');
+    });
+
+    it('No name', async () => {
+
+      const result = await productsService.insert(noValue);
+
+      expect(result.type).to.equal('INVALID_VALUE');
+      expect(result.message).to.equal('"name" is not allowed to be empty');
     });
 
     it('Insert ok', async () => {
