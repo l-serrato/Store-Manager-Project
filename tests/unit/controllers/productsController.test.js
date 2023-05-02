@@ -166,27 +166,23 @@ describe('Controller Tests', () => {
 
   describe('Remove tests', () => {
     afterEach(() => sinon.restore());
-    it('Status 200 & data', async () => {
+    it('Data', async () => {
 
       const res = {};
       const req = {
-        params: { id: 1 },
+        params: { id: 2 },
       };
 
       res.status = sinon.stub().returns(res);
       res.json = sinon.stub().returns();
       sinon
         .stub(productsService, 'remove')
-        .resolves([
-          [],
-        ]);
+        .resolves([[]]);
 
       await productsController.remove(req, res);
 
       expect(res.status).to.have.been.calledWith(404);
-      /* expect(res.json).to.have.been.calledWith([
-        [],
-      ]); */
+      // expect(res.json).to.have.been.calledWith();
     });
 
     it('Non-existing id', async () => {
