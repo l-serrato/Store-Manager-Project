@@ -22,7 +22,7 @@ const update = async (product, id) => {
   const error = schema.validateName(product.name);
   if (error.type) return error;
   const result = await productsModel.update(product, id);
-  return {id: id, name: result.name};
+  return { id, name: result.name };
 };
 
 const remove = (id) => {
