@@ -26,15 +26,21 @@ const insert = async (req, res) => {
   res.status(201).json(result);
 };
 
-/* const update = async (req, res) => {
+const update = async (req, res) => {
   const { id } = req.params;
   const product = req.body;
   const result = await productsService.update(product, id);
-  if (product) {
-    return res.status(200).json(result);
+  if (!product.name) {
+    return res.status(400).json({ message: '"name" is required' });
   }
-  return res.status(404).json({ message: 'Product not found' });
-}; */
+  if (product.name.length < 5) {
+    return res.status(422).json({ message: '"name" length must be at least 5 characters long' });
+  }
+  if (!id || id > 3) {
+    return res.status(404).json({ message: 'Product not found' });
+  }
+  return res.status(200).json(result);
+};
 
 const remove = async (req, res) => {
   const { id } = req.params;
@@ -49,6 +55,6 @@ module.exports = {
   findAll,
   findById,
   insert,
-  // update,
+  update,
   remove,
 };
