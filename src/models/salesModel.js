@@ -17,21 +17,21 @@ const findSalesById = async (id) => {
   return result;
 };
 
-/* const insertSales = async (sale) => {
+const insertSales = async (sale) => {
   const [{ insertId }] = await connection
-    .execute('INSERT INTO sales (date) VALUE (?)');
+    .execute('INSERT INTO sales (date) VALUES (?)');
 
   sale.forEach(({ productId, quantity }) => {
     connection.execute(
-      'INSERT INTO sales_products (sale_id, product_id, quantity) VALUE (?, ?, ?)',
+      'INSERT INTO sales_products (sale_id, product_id, quantity) VALUES (?, ?, ?)',
       [insertId, productId, quantity],
     );
   });
   return { id: insertId, itemsSold: sale };
-}; */
+};
 
 module.exports = {
   findAllSales,
   findSalesById,
-  // insertSales,
+  insertSales,
 };

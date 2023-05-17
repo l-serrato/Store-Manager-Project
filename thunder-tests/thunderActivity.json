@@ -18,16 +18,73 @@
     "colId": "history",
     "containerId": "",
     "name": "http://localhost:3001/products/1",
-    "url": "http://localhost:3001/products/1",
-    "method": "PUT",
+    "url": "http://localhost:3001/sales/",
+    "method": "POST",
     "sortNum": 0,
     "created": "2023-04-26T19:41:54.165Z",
-    "modified": "2023-05-02T19:05:17.562Z",
+    "modified": "2023-05-02T19:21:52.988Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"Excalibur\"\n}",
+      "raw": "[\n  {\n    \"productId\": 1,\n    \"quantity\": 1\n  },\n  {\n    \"productId\": 2,\n    \"quantity\": 5\n  }\n  ]",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "0139876c-c190-4323-9f63-6a97c8d1a687",
+    "colId": "history",
+    "containerId": "",
+    "name": "https//localhost:3001/sales",
+    "url": "https//localhost:3001/sales",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-05-02T19:45:56.865Z",
+    "modified": "2023-05-02T19:45:56.865Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "[\n  {\n    \"productId\": 1,\n    \"quantity\": 1\n  },\n  {\n    \"productId\": 2,\n    \"quantity\": 5\n  }\n]",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "ddf51437-7b3c-4541-a3d8-ef7b3e27facf",
+    "colId": "history",
+    "containerId": "",
+    "name": "http//localhost:3001/sales",
+    "url": "http//localhost:3001/sales",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-05-02T19:46:42.476Z",
+    "modified": "2023-05-02T19:46:42.476Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "[\n  {\n    \"productId\": 1,\n    \"quantity\": 1\n  },\n  {\n    \"productId\": 2,\n    \"quantity\": 5\n  }\n]",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "3d562a93-a91e-4650-8358-de8b8f9016c0",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:3001/sales/",
+    "url": "http://localhost:3001/sales/",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-05-02T19:47:08.283Z",
+    "modified": "2023-05-02T19:47:08.283Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "[\n  {\n    \"productId\": 1,\n    \"quantity\": 1\n  },\n  {\n    \"productId\": 2,\n    \"quantity\": 5\n  }\n]",
       "form": []
     },
     "tests": []

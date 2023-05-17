@@ -14,8 +14,9 @@ const findSalesById = async (req, res) => {
   return res.status(200).json(sale);
 };
 
-/* const insertSales = async (req, res) => {
-  const sale = req.body;
+const insertSales = async (req, res) => {
+  const [sale] = req.body;
+  console.log(sale);
   const result = await salesService.insertSales(sale);
   if (!sale.quantity) {
     return res.status(400).json({ message: '"quantity" is required' });
@@ -23,14 +24,14 @@ const findSalesById = async (req, res) => {
   if (!sale.productId) {
     return res.status(400).json({ message: '"productId" is required' });
   }
-  if (sale.quantity < 1) {
+  if (sale.quantity <= 0) {
     return res.status(422).json({ message: '"quantity" must be greater than or equal to 1' });
   }
   res.status(201).json(result);
-}; */
+};
 
 module.exports = {
   findAllSales,
   findSalesById,
-  // insertSales,
+  insertSales,
 };
